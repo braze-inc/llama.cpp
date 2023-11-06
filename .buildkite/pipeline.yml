@@ -1,0 +1,16 @@
+env:
+  IMAGE_ARTIFACTORY: "artifactory.infra.braze.com/docker/ggml-quantizer"
+
+steps:
+  - label: ":docker: Build Quantizer"
+    plugins:
+      - docker-login#v2.0.1:
+          username: appboyci
+      - docker-login#v2.0.1:
+          server: artifactory.infra.braze.com
+          username: buildkite
+          password-env: ARTIFACTORY_PASSWORD
+    commands:
+      - "docker build -t ${IMAGE_ARTIFACTORY}:latest ."
+      - "docker push ${IMAGE_ARTIFACTORY}:latest"
+    if: build.branch == "base"
