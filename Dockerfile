@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as quantizer
+FROM artifactory.infra.braze.com/docker-virtual/python:3.9-slim-bullseye as quantizer
 
 WORKDIR /quantizer
 
